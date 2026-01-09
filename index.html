@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>KWIATY — EP</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Alex+Brush&display=swap" rel="stylesheet">
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  color: #111;
+  overflow-x: hidden;
+}
+
+/* ===== CLEAN GLASS BACKGROUND ===== */
+.background {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background: #ECE9E4;
+}
+
+.background::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  backdrop-filter: blur(30px) saturate(1.05);
+  background: linear-gradient(
+    180deg,
+    rgba(255,255,255,0.45),
+    rgba(255,255,255,0.12)
+  );
+}
+
+.background-darkener {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* ===== HEADER ===== */
+header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255,255,255,0.6);
+  backdrop-filter: blur(10px);
+  z-index: 10;
+  letter-spacing: 0.2em;
+}
+
+.spacer { height: 72px; }
+
+/* ===== HERO (DESKTOP FIX) ===== */
+section.hero {
+  min-height: 38vh; /* 🔧 KLUCZOWA POPRAWKA */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+}
+
+/* ===== HERO TITLE ===== */
+.hero-title {
+  position: relative;
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  font-weight: 300;
+  letter-spacing: 0.15em;
+  margin-bottom: 2vh;
+  display: inline-block;
+}
+
+/* ===== BYLINE ===== */
+.hero-title .byline {
+  position: absolute;
+  left: 69%;
+  bottom: -2.1rem;
+  font-family: 'Alex Brush', cursive;
+  font-size: 3.1rem;
+  white-space: nowrap;
+  opacity: 0;
+  filter: blur(4px);
+  transform: translateY(6px);
+  transition: 1.2s ease;
+  pointer-events: none;
+  mix-blend-mode: multiply;
+}
+
+/* ===== RÓŻA (DESKTOP) ===== */
+.roses-bridge {
+  position: absolute;
+  bottom: -72vh;
+  left: 50%;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.roses-bridge img {
+  width: 72vw;
+  max-width: 900px;
+  opacity: 0.95;
+}
+
+/* ===== IMAGES ===== */
+.image-block {
+  width: 70%;
+  max-width: 1200px;
+  margin: 6vh auto;
+}
+
+.image-block img {
+  width: 100%;
+  display: block;
+}
+
+/* ===== SCROLL TEXT ===== */
+.scroll-text {
+  position: fixed;
+  top: 35%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.scroll-text p {
+  max-width: 760px;
+  font-size: 1.35rem;
+  line-height: 1.9;
+  color: #fff;
+  opacity: 0;
+  position: absolute;
+  text-align: center;
+  text-shadow:
+    0 0 12px rgba(0,0,0,0.66),
+    0 0 32px rgba(0,0,0,0.44);
+  transition: opacity .6s ease;
+}
+
+/* ===== LINKS ===== */
+.links-panel {
+  position: fixed;
+  top: 43vh;
+  right: 43px;
+  height: 56px;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  background: rgba(255,255,255,0.96);
+  border-radius: 999px;
+  z-index: 9;
+}
+
+.links-panel img {
+  height: 26px;
+  opacity: .75;
+}
+
+/* ===== FOOTER ===== */
+footer {
+  padding: 60px 20px;
+  text-align: center;
+  font-size: .8rem;
+  letter-spacing: .2em;
+  color: #999;
+}
+
+/* ================= MOBILE 9:16 ================= */
+
+@media (max-width: 768px) {
+
+  body {
+    max-width: 82vw;
+    margin: 0 auto;
+  }
+
+  section.hero {
+    min-height: 100svh;
+    padding-top: 3vh;
+  }
+
+  .hero-title {
+    font-size: clamp(1.9rem, 7vw, 2.6rem);
+    margin-bottom: 10vh;
+    letter-spacing: 0.12em;
+  }
+
+  .hero-title .byline {
+    font-size: 2.2rem;
+    left: 60%;
+    bottom: -2rem;
+  }
+
+  .image-block {
+    width: 100%;
+    margin: 4vh auto;
+  }
+
+  .scroll-text p {
+    font-size: 1rem;
+    max-width: 86%;
+    line-height: 1.75;
+  }
+
+  .links-panel {
+    top: auto;
+    bottom: 14px;
+    right: 50%;
+    transform: translateX(50%);
+    height: 62px;
+    padding: 0 26px;
+    gap: 26px;
+  }
+
+  .links-panel img {
+    height: 28px;
+  }
+
+  /* ❌ RÓŻA OFF NA MOBILE */
+  .roses-bridge {
+    display: none;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="background"></div>
+<div class="background-darkener" id="darkener"></div>
+
+<header>K W I A T Y</header>
+<div class="spacer"></div>
+
+<section class="hero">
+  <h1 class="hero-title">
+    EP · KWIATY
+    <span class="byline" id="byline">by wojtszu</span>
+  </h1>
+
+  <div class="roses-bridge">
+    <img src="images/rrrrr.png">
+  </div>
+</section>
+
+<section class="gallery">
+  <div class="image-block"><img id="bckd" src="images/bckd.png"></div>
+  <div class="image-block"><img id="okdk" src="images/okdk.png"></div>
+  <div class="image-block"><img id="img-3" src="images/134A5478.JPG"></div>
+  <div class="image-block"><img id="img-4" src="images/134A5762.JPG"></div>
+</section>
+
+<div class="scroll-text">
+  <p id="text-1">„Kwiaty” to opowieść o smutku i miłości, o stracie i złości – każdy kwiat to osobna historia.</p>
+  <p id="text-2">EP można zakupić w dwóch wersjach<br><br>STANDARDOWA EDYCJA - 37 zł + przesyłka 13 zł<br>EDYCJA PREMIUM - bilet na koncert "KWIATY EP", opaska SPTVIP, unikalny plakat "KWIATY EP" - 100 zł</p>
+  <p id="text-3">Dostępność limitowana. Sprzedaż do wyczerpania nakładu.</p>
+</div>
+
+<div class="links-panel">
+  <a href="https://instagram.com/wojtszu" target="_blank"><img src="images/ig%20prompt.png"></a>
+  <a href="https://open.spotify.com/artist/0wUz3bnlM72UiaG0JQEPn2" target="_blank"><img src="images/spotilog.png"></a>
+  <a href="https://youtube.com/@WOJTSZU" target="_blank"><img src="images/ytlog.png"></a>
+</div>
+
+<footer>EP KWIATY</footer>
+
+<script>
+/* ===== DARKENING ===== */
+const darkener = document.getElementById('darkener');
+window.addEventListener('scroll', () => {
+  const p = Math.min(window.scrollY / (document.body.scrollHeight - innerHeight), 1);
+  darkener.style.background = `rgba(0,0,0,${p * 0.9})`;
+});
+
+/* ===== SCROLL TEXT ===== */
+const text1 = document.getElementById('text-1');
+const text2 = document.getElementById('text-2');
+const text3 = document.getElementById('text-3');
+
+const bckd = document.getElementById('bckd');
+const okdk = document.getElementById('okdk');
+const img3 = document.getElementById('img-3');
+const img4 = document.getElementById('img-4');
+
+function showOnly(n) {
+  text1.style.opacity = n === 1 ? 1 : 0;
+  text2.style.opacity = n === 2 ? 1 : 0;
+  text3.style.opacity = n === 3 ? 1 : 0;
+}
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    if (e.target === bckd) showOnly(0);
+    if (e.target === okdk) showOnly(1);
+    if (e.target === img3) showOnly(2);
+    if (e.target === img4) showOnly(3);
+  });
+}, { rootMargin: "-40% 0px -40% 0px" });
+
+[bckd, okdk, img3, img4].forEach(el => observer.observe(el));
+
+/* ===== BYLINE ===== */
+const byline = document.getElementById('byline');
+window.addEventListener('load', () => {
+  byline.style.opacity = 1;
+  byline.style.filter = 'blur(0)';
+  byline.style.transform = 'translateY(0)';
+});
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
