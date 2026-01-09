@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>KWIATY — EP</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Alex+Brush&display=swap" rel="stylesheet">
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  color: #111;
+  overflow-x: hidden;
+}
+
+/* ===== CINEMATIC GLASS BACKGROUND (CLEAN) ===== */
+.background {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background: #ECE9E4;
+}
+.background::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  backdrop-filter: blur(30px) saturate(1.05);
+  background: linear-gradient(
+    180deg,
+    rgba(255,255,255,0.45),
+    rgba(255,255,255,0.12)
+  );
+}
+.background-darkener {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: rgba(0,0,0,0);
+}
+
+/* ===== HEADER ===== */
+header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255,255,255,0.6);
+  backdrop-filter: blur(10px);
+  z-index: 10;
+  letter-spacing: 0.2em;
+}
+.spacer { height: 72px; }
+
+/* ===== HERO ===== */
+section.hero {
+  min-height: 33vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  overflow: visible;
+}
+
+/* ===== HERO TITLE ===== */
+.hero-title {
+  position: relative;
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  font-weight: 300;
+  letter-spacing: 0.15em;
+  margin-bottom: 2vh;
+  display: inline-block;
+}
+
+/* ===== BYLINE ===== */
+.hero-title .byline {
+  position: absolute;
+  left: 69%;
+  bottom: -2.1rem;
+  font-family: 'Alex Brush', cursive;
+  font-size: 3.1rem;
+  color: #000;
+  white-space: nowrap;
+  opacity: 0;
+  filter: blur(4px);
+  transform: translateY(6px);
+  transition: opacity 1.2s ease, filter 1.2s ease, transform 1.2s ease;
+  pointer-events: none;
+  mix-blend-mode: multiply;
+}
+
+/* ===== RÓŻE (DESKTOP) ===== */
+.roses-bridge {
+  position: absolute;
+  bottom: -74vh;
+  left: 50%;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+.roses-bridge img {
+  width: 72vw;
+  max-width: 900px;
+  opacity: 0.95;
+}
+
+/* ===== IMAGES ===== */
+.image-block {
+  width: 70%;
+  max-width: 1200px;
+  margin: 6vh auto;
+  position: relative;
+}
+.image-block img {
+  width: 100%;
+  display: block;
+}
+
+/* ===== SALES TILES (LAST IMAGE) ===== */
+.sales-tiles {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 8%;
+  pointer-events: none;
+}
+.tile {
+  width: 38%;
+  min-height: 180px;
+  background: rgba(255,255,255,0.9);
+  backdrop-filter: blur(12px);
+  border-radius: 22px;
+  padding: 22px;
+  text-align: center;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.25);
+  pointer-events: auto;
+  cursor: pointer;
+}
+.tile h3 {
+  letter-spacing: .15em;
+  font-weight: 400;
+}
+.tile .content { display: none; font-size: .95rem; line-height: 1.6; }
+.tile.active .content { display: block; }
+.tile.active .title { display: none; }
+
+/* ===== SCROLL TEXT ===== */
+.scroll-text {
+  position: fixed;
+  top: 35%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 5;
+}
+.scroll-text p {
+  max-width: 760px;
+  font-size: 1.35rem;
+  line-height: 1.9;
+  color: #ffffff;
+  opacity: 0;
+  position: absolute;
+  text-align: center;
+  text-shadow:
+    0 0 12px rgba(0,0,0,0.66),
+    0 0 32px rgba(0,0,0,0.44);
+  transition: opacity .6s ease;
+}
+
+/* ===== LINKS PANEL ===== */
+.links-panel {
+  position: fixed;
+  top: 43vh;
+  right: 43px;
+  height: 56px;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  background: rgba(255,255,255,0.96);
+  border-radius: 999px;
+  z-index: 9;
+}
+.links-panel img {
+  height: 26px;
+  opacity: .75;
+}
+
+/* ===== FOOTER ===== */
+footer {
+  position: relative;
+  z-index: 2;
+  padding: 60px 20px;
+  text-align: center;
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  color: #999;
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 768px) {
+  body { max-width: 82vw; margin: 0 auto; }
+  .image-block { width: 100%; margin: 4vh auto; }
+  .roses-bridge { display: none; }
+
+  .links-panel {
+    top: auto;
+    bottom: 14px;
+    right: 50%;
+    transform: translateX(50%);
+  }
+
+  .sales-tiles {
+    flex-direction: column;
+    gap: 16px;
+    padding: 0 10%;
+  }
+  .tile { width: 100%; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="background"></div>
+<div class="background-darkener" id="darkener"></div>
+
+<header>K W I A T Y</header>
+<div class="spacer"></div>
+
+<section class="hero">
+  <h1 class="hero-title">
+    EP · KWIATY
+    <span class="byline" id="byline">by wojtszu</span>
+  </h1>
+  <div class="roses-bridge"><img src="images/rrrrr.png"></div>
+</section>
+
+<section class="gallery">
+  <div class="image-block"><img id="bckd" src="images/bckd.png"></div>
+  <div class="image-block"><img id="okdk" src="images/okdk.png"></div>
+  <div class="image-block"><img id="img-3" src="images/134A5478.JPG"></div>
+
+  <div class="image-block">
+    <img id="img-4" src="images/134A5762.JPG">
+    <div class="sales-tiles">
+      <div class="tile" onclick="this.classList.toggle('active')">
+        <h3 class="title">EDYCJA PREMIUM</h3>
+        <div class="content">
+          <strong>100 zł</strong><br><br>
+          Wojciech Jarek – Wojtszu<br>
+          69 1050 1924 1000 0022 3385 1266<br>
+          Tytuł: KWIATY EP PREMIUM<br>
+          Paczkomat + email<br>
+          wojtszu@gmail.com
+        </div>
+      </div>
+
+      <div class="tile" onclick="this.classList.toggle('active')">
+        <h3 class="title">EDYCJA STANDARD</h3>
+        <div class="content">
+          <strong>37 zł + 13 zł</strong><br><br>
+          Wojciech Jarek – Wojtszu<br>
+          69 1050 1924 1000 0022 3385 1266<br>
+          Tytuł: KWIATY EP STANDARD<br>
+          Paczkomat + email<br>
+          wojtszu@gmail.com
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="scroll-text">
+  <p id="text-1">„Kwiaty” to opowieść o smutku i miłości, o stracie i złości – każdy kwiat to osobna historia.</p>
+  <p id="text-2">
+    EP można zakupić w dwóch wersjach<br><br>
+    STANDARD - 37 zł + przesyłka 13 zł<br>
+    EDYCJA PREMIUM - bilet na koncert "KWIATY EP", opaska SPTVIP, unikalny plakat "KWIATY EP" - 100 zł
+  </p>
+  <p id="text-3">Wybierz swoją.</p>
+</div>
+
+<div class="links-panel">
+  <a href="https://instagram.com/wojtszu" target="_blank"><img src="images/ig%20prompt.png"></a>
+  <a href="https://open.spotify.com/artist/0wUz3bnlM72UiaG0JQEPn2" target="_blank"><img src="images/spotilog.png"></a>
+  <a href="https://youtube.com/@WOJTSZU" target="_blank"><img src="images/ytlog.png"></a>
+</div>
+
+<footer>EP KWIATY</footer>
+
+<script>
+const darkener = document.getElementById('darkener');
+window.addEventListener('scroll', () => {
+  const p = Math.min(window.scrollY / (document.body.scrollHeight - innerHeight), 1);
+  darkener.style.background = `rgba(0,0,0,${p * 0.9})`;
+});
+
+const texts = [
+  document.getElementById('text-1'),
+  document.getElementById('text-2'),
+  document.getElementById('text-3')
+];
+function showOnly(n) {
+  texts.forEach((t,i)=>t.style.opacity = n===i+1?1:0);
+}
+const observer = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(!e.isIntersecting) return;
+    if(e.target.id==="bckd") showOnly(0);
+    if(e.target.id==="okdk") showOnly(1);
+    if(e.target.id==="img-3") showOnly(2);
+    if(e.target.id==="img-4") showOnly(3);
+  });
+},{rootMargin:"-30% 0px -60% 0px"});
+["bckd","okdk","img-3","img-4"].forEach(id=>{
+  observer.observe(document.getElementById(id));
+});
+
+const byline = document.getElementById('byline');
+window.addEventListener('load',()=>{
+  byline.style.opacity=1;
+  byline.style.filter='blur(0)';
+  byline.style.transform='translateY(0)';
+});
+</script>
+
+</body>
+</html>
+
+
+
+
